@@ -1,7 +1,7 @@
 
 public enum Status {
-	LowerDivision,
-	UpperDivision,
-	Graduate,
-	Unknown;
+	Probation,
+	Warning,
+	Normal,
+	Honors;
 }

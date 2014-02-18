@@ -2,7 +2,7 @@
 public class Registrar {
 
 
-	public boolean canRegister(Status status){
+	public boolean canRegister(Status status, YearLevel year){
 		return false;
 	}
 	
