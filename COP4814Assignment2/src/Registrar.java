@@ -4,15 +4,15 @@ public class Registrar {
 
 	public boolean canRegister(Status status, YearLevel year, double avg, int credit){
 		if(status==Status.Probation){
-			if(year==YearLevel.LowerDivision)
+			if(year==YearLevel.LowerDivision){
 				if(credit>6)
 					return false;
-			else if(year==YearLevel.UpperDivision)
+			}else if(year==YearLevel.UpperDivision){
 				if(credit>3)
 					return false;
-			
+			}
 		}else if(status==Status.Warning){
-			if(year==YearLevel.LowerDivision)
+			if(year==YearLevel.LowerDivision){
 				if(avg >2.2){
 					if(credit>12)
 						return false;
@@ -20,7 +20,7 @@ public class Registrar {
 					if(credit>6)
 						return false;
 				}
-			else if(year==YearLevel.UpperDivision){
+			}else if(year==YearLevel.UpperDivision){
 				if(avg>2.4){
 					if(credit>10)
 						return false;

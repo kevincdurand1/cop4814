@@ -3,5 +3,6 @@ public enum Status {
 	Probation,
 	Warning,
 	Normal,
-	Honors;
+	Honors,
+	Unknown;
 }
