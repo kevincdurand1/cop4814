@@ -14,8 +14,71 @@ public class RegistrarTester{
 
 	@Test
 	public void testProbLowerFalse(){
-		assertFalse("Status Probation Year Lower with 5 credits", 
+		assertFalse("Status Probation Year Lower with 8 credits", 
 				   registrar.canRegister(Status.Probation, YearLevel.LowerDivision, 0.0, 8));
+	}
+	
+	@Test
+	public void testProbUpperTrue(){
+		assertTrue("Staus Probation Year Upper with 3 credits", 
+				   registrar.canRegister(Status.Probation, YearLevel.UpperDivision, 0.0, 3));
+	}
+    
+	@Test
+	public void testProbUpperFalse(){
+		assertFalse("Staus Probation Year Upper with 6 credits", 
+				   registrar.canRegister(Status.Probation, YearLevel.UpperDivision, 0.0, 6));
+	}
+	
+	
+	@Test
+	public void testWarningLowerHighGpaTrue(){
+		assertTrue("Status: Warning, Year:LowerLevel, GPA>2.2, 10 credits",
+				    registrar.canRegister(Status.Warning, YearLevel.LowerDivision, 2.5, 10));
+	}
+	
+	@Test
+	public void testWarningLowerHighGpaFalse(){
+		assertFalse("Status: Warning, Year:LowerLevel, GPA>2.2, 10 credits",
+				    registrar.canRegister(Status.Warning, YearLevel.LowerDivision, 2.5, 13));
+	}
+	
+
+	@Test
+	public void testWarningLowerLowGpaTrue(){
+		assertTrue("Status: Warning, Year:LowerLevel, GPA<=2.2, 4 credits",
+				    registrar.canRegister(Status.Warning, YearLevel.LowerDivision, 2.0, 4));
+	}
+	
+	@Test
+	public void testWarningLowerLowGpaFalse(){
+		assertFalse("Status: Warning, Year:LowerLevel, GPA<=2.2, 7 credits",
+				    registrar.canRegister(Status.Warning, YearLevel.LowerDivision, 2.0, 7));
+	}
+	
+
+	@Test
+	public void testWarningUpperHighGpaTrue(){
+		assertTrue("Status: Warning, Year:LowerLevel, GPA>2.4, 9 credits",
+				    registrar.canRegister(Status.Warning, YearLevel.UpperDivision, 2.5, 9));
+	}
+	
+	@Test
+	public void testWarningUpperHighGpaFalse(){
+		assertFalse("Status: Warning, Year:LowerLevel, GPA>2.4, 13 credits",
+				    registrar.canRegister(Status.Warning, YearLevel.UpperDivision, 2.5, 13));
+	}
+	
+	@Test
+	public void testWarningUpperLowGpaTrue(){
+		assertTrue("Status: Warning, Year:LowerLevel, GPA<=2.4, 6 credits",
+				    registrar.canRegister(Status.Warning, YearLevel.UpperDivision, 2.3, 6));
+	}
+	
+	@Test
+	public void testWarningUpperLowGpaFalse(){
+		assertFalse("Status: Warning, Year:LowerLevel, GPA<=2.4, 10 credits",
+				    registrar.canRegister(Status.Warning, YearLevel.UpperDivision, 2.3, 10));
 	}
 
 	@Test
@@ -101,5 +164,7 @@ public class RegistrarTester{
 		assertFalse("Status Honors, GPA <3.0 with 18 credits",
 				registrar.canRegister(Status.Honors, YearLevel.Unknown, 2.7, 18));
 	}
-
+	
+	
+	
 }
