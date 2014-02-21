@@ -165,6 +165,32 @@ public class RegistrarTester{
 				registrar.canRegister(Status.Honors, YearLevel.Unknown, 2.7, 18));
 	}
 	
+	@Test
+	public void testUnknownNotGrad(){
+		assertFalse("Status Unkown not a Graduate Student",
+				registrar.canRegister(Status.Unknown, YearLevel.UpperDivision, 0.0, 1));
+	}
 	
+	@Test
+	public void testUnknownIsGrad(){
+		assertTrue("Status Unkown is a Graduate Student",
+				registrar.canRegister(Status.Unknown, YearLevel.Graduate, 0.0, 1));
+	}
 	
+	@Test
+	public void testNotHonorsUnkownLevel(){
+		assertFalse("YearLevel Unkown not an Honors Student",
+				registrar.canRegister(Status.Normal, YearLevel.Unknown, 0.0, 1));
+		assertFalse("YearLevel Unkown not an Honors Student",
+				registrar.canRegister(Status.Probation, YearLevel.Unknown, 0.0, 1));
+		assertFalse("YearLevel Unkown not an Honors Student",
+				registrar.canRegister(Status.Unknown, YearLevel.Unknown, 0.0, 1));
+	}
+	
+	@Test
+	public void testHonorsUnknownLevel(){
+		assertTrue("YearLevel Unkown is an Honors Student",
+				registrar.canRegister(Status.Honors, YearLevel.Unknown, 0.0, 1));
+	}
+
 }

@@ -3,6 +3,14 @@ public class Registrar {
 
 
 	public boolean canRegister(Status status, YearLevel year, double avg, int credit){
+		if(status==Status.Unknown && year != YearLevel.Graduate){
+			return false;
+		}
+		
+		if(year == YearLevel.Unknown && status != Status.Honors){
+			return false;
+		}
+		
 		if(status==Status.Probation){
 			if(year==YearLevel.LowerDivision){
 				if(credit>6)
@@ -52,7 +60,9 @@ public class Registrar {
 					return false;
 			}
 		
-		}if(year==YearLevel.Graduate){
+		}
+		
+		if(year==YearLevel.Graduate){
 			if(avg<3.0){
 				if(credit>6)
 					return false;
@@ -60,8 +70,10 @@ public class Registrar {
 				if(credit>12)
 					return false;
 			}
+			
 		}
 		
+
 		return true;
 	}
 	
