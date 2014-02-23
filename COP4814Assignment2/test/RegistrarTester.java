@@ -84,25 +84,25 @@ public class RegistrarTester{
 	@Test
 	public void testGradLowGpaTrue(){
 		assertTrue("Graduate, GPA <3.0 with 6 credits",
-				registrar.canRegister(Status.Unknown, YearLevel.Graduate, 2.8, 6));
+				registrar.canRegister(Status.Normal, YearLevel.Graduate, 2.8, 6));
 	}
 
 	@Test
 	public void testGradLowGpaFalse(){
 		assertFalse("Graduate, GPA <3.0 with 12 credits",
-				registrar.canRegister(Status.Unknown, YearLevel.Graduate, 2.8, 12));
+				registrar.canRegister(Status.Normal, YearLevel.Graduate, 2.8, 12));
 	}
 
 	@Test
 	public void testGradHighGpaTrue(){
 		assertTrue("Graduate, GPA >3.0 with 12 credits",
-				registrar.canRegister(Status.Unknown, YearLevel.Graduate, 3.4, 12));
+				registrar.canRegister(Status.Normal, YearLevel.Graduate, 3.4, 12));
 	}
 
 	@Test
 	public void testGradHighGpaFalse(){
 		assertFalse("Graduate, GPA >3.0 with 15 credits",
-				registrar.canRegister(Status.Unknown, YearLevel.Graduate, 3.4, 15));
+				registrar.canRegister(Status.Normal, YearLevel.Graduate, 3.4, 15));
 	}
 
 	@Test
@@ -144,53 +144,25 @@ public class RegistrarTester{
 	@Test
 	public void testHonorsHighAvgTrue(){
 		assertTrue("Status Honors, GPA >3.0 with 20 credits",
-				registrar.canRegister(Status.Honors, YearLevel.Unknown, 3.2, 20));
+				registrar.canRegister(Status.Honors, YearLevel.UpperDivision, 3.2, 20));
 	}
 	
 	@Test
 	public void testHonorsHighAvgFalse(){
 		assertFalse("Status Honors, GPA <3.0 with 24 credits",
-				registrar.canRegister(Status.Honors, YearLevel.Unknown, 3.2, 24));
+				registrar.canRegister(Status.Honors, YearLevel.UpperDivision, 3.2, 24));
 	}
 	
 	@Test
 	public void testHonorsLowAvgTrue(){
 		assertTrue("Status Honors, GPA <3.0 with 12 credits",
-				registrar.canRegister(Status.Honors, YearLevel.Unknown, 2.7, 12));
+				registrar.canRegister(Status.Honors, YearLevel.UpperDivision, 2.7, 12));
 	}
 	
 	@Test
 	public void testHonorsLowAvgFalse(){
 		assertFalse("Status Honors, GPA <3.0 with 18 credits",
-				registrar.canRegister(Status.Honors, YearLevel.Unknown, 2.7, 18));
+				registrar.canRegister(Status.Honors, YearLevel.UpperDivision, 2.7, 18));
 	}
 	
-	@Test
-	public void testUnknownNotGrad(){
-		assertFalse("Status Unkown not a Graduate Student",
-				registrar.canRegister(Status.Unknown, YearLevel.UpperDivision, 0.0, 1));
-	}
-	
-	@Test
-	public void testUnknownIsGrad(){
-		assertTrue("Status Unkown is a Graduate Student",
-				registrar.canRegister(Status.Unknown, YearLevel.Graduate, 0.0, 1));
-	}
-	
-	@Test
-	public void testNotHonorsUnkownLevel(){
-		assertFalse("YearLevel Unkown not an Honors Student",
-				registrar.canRegister(Status.Normal, YearLevel.Unknown, 0.0, 1));
-		assertFalse("YearLevel Unkown not an Honors Student",
-				registrar.canRegister(Status.Probation, YearLevel.Unknown, 0.0, 1));
-		assertFalse("YearLevel Unkown not an Honors Student",
-				registrar.canRegister(Status.Unknown, YearLevel.Unknown, 0.0, 1));
-	}
-	
-	@Test
-	public void testHonorsUnknownLevel(){
-		assertTrue("YearLevel Unkown is an Honors Student",
-				registrar.canRegister(Status.Honors, YearLevel.Unknown, 0.0, 1));
-	}
-
 }
