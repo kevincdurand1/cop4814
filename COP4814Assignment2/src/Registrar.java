@@ -1,4 +1,8 @@
-
+/**
+ * Assignment by
+ * Leonardo Menendez
+ * Robert Gomez
+ */
 public class Registrar {
 
 
@@ -11,18 +15,20 @@ public class Registrar {
 				if(credit>12)
 					return false;
 			}
-			
+
 			return true;
 		}
-				if(status==Status.Probation){
+		if(status==Status.Probation){
 			if(year==YearLevel.LowerDivision){
 				if(credit>6)
 					return false;
-			}else if(year==YearLevel.UpperDivision){
+			}
+			if(year==YearLevel.UpperDivision){
 				if(credit>3)
 					return false;
 			}
-		}else if(status==Status.Warning){
+		}
+		if(status==Status.Warning){
 			if(year==YearLevel.LowerDivision){
 				if(avg >2.2){
 					if(credit>12)
@@ -31,7 +37,8 @@ public class Registrar {
 					if(credit>6)
 						return false;
 				}
-			}else if(year==YearLevel.UpperDivision){
+			}
+			if(year==YearLevel.UpperDivision){
 				if(avg>2.4){
 					if(credit>10)
 						return false;
@@ -40,7 +47,8 @@ public class Registrar {
 						return false;
 				}
 			}
-		}else if(status==Status.Normal){
+		}
+		if(status==Status.Normal){
 			if(year==YearLevel.LowerDivision){
 				if(avg>2.5){
 					if(credit>16)
@@ -49,12 +57,14 @@ public class Registrar {
 					if(credit>12)
 						return false;
 				}
-			}else if(year==YearLevel.UpperDivision){
+			}
+			if(year==YearLevel.UpperDivision){
 				if(credit>18)
 					return false;
 			}
-			
-		}else if(status==Status.Honors){
+
+		}
+		if(status==Status.Honors){
 			if(avg<3.0){
 				if(credit>16)
 					return false;
@@ -62,12 +72,26 @@ public class Registrar {
 				if(credit>22)
 					return false;
 			}
-		
+
 		}
-		
+
 
 
 		return true;
 	}
-	
+
+	public enum Status {
+		Probation,
+		Warning,
+		Normal,
+		Honors;
+	}
+
+	public enum YearLevel {
+		LowerDivision,
+		UpperDivision,
+		Graduate;
+	}
+
+
 }
