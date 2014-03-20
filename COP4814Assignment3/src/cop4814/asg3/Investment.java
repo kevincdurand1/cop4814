@@ -9,6 +9,21 @@ public class Investment implements Comparable<Investment> {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public Investment(String ticker){
+		this();
+		this.ticker = ticker;
+	}
+	
+	public Investment(String ticker, int numShares){
+		this(ticker);
+		this.numShares = numShares;
+	}
+	
+	public Investment(String ticker, int numShares, double price){
+		this(ticker, numShares);
+		this.price = price;
+	}
+	
 	public String getTicker() {
 		return this.ticker;	
 	}
@@ -31,6 +46,11 @@ public class Investment implements Comparable<Investment> {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	
+	@Override
+	public String toString(){
+		return String.format("Investment: %s, %d @ $%f\n", getTicker(), getNumShares(), getPrice());
 	}
 
 	@Override

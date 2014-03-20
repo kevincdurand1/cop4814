@@ -4,20 +4,30 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Portfolio implements Comparable<Portfolio> {
-	private String portfolioID;
+	private String portfolioId;
 	private double cashBalance;
 	private List<Investment> holdings = new LinkedList<Investment>();
 
 	public Portfolio() {
-		// TODO Auto-generated constructor stub
+
+	}
+	
+	public Portfolio(String portfolioId){
+		this();
+		this.portfolioId = portfolioId;
+	}
+	
+	public Portfolio(String portfolioId, Double cashBalance){
+		this(portfolioId);
+		this.cashBalance = cashBalance;
 	}
 
-	public String getPortfolioID() {
-		return portfolioID;
+	public String getId() {
+		return portfolioId;
 	}
 
-	public void setPortfolioID(String portfolioID) {
-		this.portfolioID = portfolioID;
+	public void setId(String portfolioId) {
+		this.portfolioId = portfolioId;
 	}
 
 	public double getCashBalance() {
@@ -33,16 +43,21 @@ public class Portfolio implements Comparable<Portfolio> {
 	}
 	
 	@Override
+	public String toString(){
+		return String.format("Portfolio: %s Balance:%f \n %s\n", getId(), getCashBalance(), getHoldings().toString());
+	}
+		
+	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Portfolio)
-			return ((Portfolio)obj).getPortfolioID().equalsIgnoreCase(this.portfolioID);
+			return ((Portfolio)obj).getId().equalsIgnoreCase(this.portfolioId);
 		//not an instance of Portfolio, let Object handle it
 		return super.equals(obj);
 	}
 
 	@Override
 	public int compareTo(Portfolio port) {
-		return port.getPortfolioID().compareTo(this.portfolioID);
+		return port.getId().compareTo(this.portfolioId);
 	}
 
 }

@@ -11,17 +11,27 @@ public class Account implements Comparable<Account>, Iterable<Portfolio> {
 	public Account() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Account(String accountId){
+		this();
+		this.accountId = accountId;
+	}
 
-	public String getAccountId() {
+	public String getId() {
 		return accountId;
 	}
 
-	public void setAccountId(String accountId) {
+	public void setId(String accountId) {
 		this.accountId = accountId;
 	}
 
 	public List<Portfolio> getPortfolios() {
 		return this.portfolios;
+	}
+	
+	@Override
+	public String toString(){
+		return String.format("Account %s \n %s \n", getId(), getPortfolios().toString());
 	}
 	
 	@Override
@@ -32,14 +42,14 @@ public class Account implements Comparable<Account>, Iterable<Portfolio> {
 	@Override
 	public boolean equals(Object obj){
 		if(obj instanceof Account)
-			return ((Account)obj).getAccountId().equals(this.accountId);
+			return ((Account)obj).getId().equals(this.accountId);
 		//Not an instance of Account, let Object handle it
 		return super.equals(obj);
 	}
 
 	@Override
 	public int compareTo(Account acc) {
-		return acc.getAccountId().compareTo(this.accountId);
+		return acc.getId().compareTo(this.accountId);
 	}
 
 }

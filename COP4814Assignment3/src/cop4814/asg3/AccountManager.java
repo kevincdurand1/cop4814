@@ -1,13 +1,18 @@
 package cop4814.asg3;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
 
 public class AccountManager {
 	private Map<String, Account> accounts;
 
 	public AccountManager() {
-		// TODO Auto-generated constructor stub
+		accounts = new TreeMap<String, Account>();
 	}
 
 	/**
@@ -17,6 +22,41 @@ public class AccountManager {
 	 * @return True if successful.
 	 */
 	public boolean readAccountsFile(String filename){
+		Scanner in = null;
+		try{
+			in = new Scanner(new File(filename));
+			String[] line = null;
+			final String delimiter = ",";
+			if(in.hasNext()){
+				int numAccounts = getInt(in.next());
+				for(int a=0; a<numAccounts; a++){
+					line = in.next().split(delimiter);
+					String accountId = line[0];
+					Account account = new Account(accountId);
+					int numPortfolio = getInt(line[1]);
+					for(int p=0; p<numPortfolio; p++){
+						line = in.next().split(delimiter);
+						String portfolioId = line[0];
+						Portfolio portfolio = new Portfolio(portfolioId, getDbl(line[1]));
+						int numInvestment = getInt(line[2]);
+						for(int i=0; i<numInvestment; i++){
+							line = in.next().split(delimiter);
+							Investment investment = new Investment(line[0], getInt(line[1]), getDbl(line[2]));
+							portfolio.getHoldings().add(investment);
+						}
+						account.getPortfolios().add(portfolio);
+					}
+					accounts.put(accountId, account);
+				}
+				return !in.hasNext();
+			}
+		}catch(FileNotFoundException nfe){
+			System.out.println("Sorry, cannot locate file: "+filename);
+		}finally{
+			if(in!=null)
+				in.close();
+		}
+		
 		return false;
 	}
 
@@ -25,7 +65,9 @@ public class AccountManager {
 	 * @return
 	 */
 	public List<Account> getAccounts(){
-		return null;
+		List<Account> list = new LinkedList<Account>();
+		list.addAll(accounts.values());
+		return list;
 	}
 
 	/**
@@ -76,4 +118,24 @@ public class AccountManager {
 	public List<Portfolio> getPortfoliosByCashBalances(){
 		return null;
 	}
+	
+	
+	private int getInt(String number){
+		try{
+			return Integer.parseInt(number);
+		}catch(NumberFormatException nfe){
+			nfe.printStackTrace();
+			return -1;
+		}
+	}
+	
+	private double getDbl(String number){
+		try{
+			return Double.parseDouble(number);
+		}catch(NumberFormatException nfe){
+			nfe.printStackTrace();
+			return 0D;
+		}
+	}
+
 }
