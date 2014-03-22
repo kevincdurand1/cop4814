@@ -50,7 +50,7 @@ public class Investment implements Comparable<Investment> {
 	
 	@Override
 	public String toString(){
-		return String.format("Investment: %s, %d @ $%f\n", getTicker(), getNumShares(), getPrice());
+		return String.format("(%s, %d shares @ $%.2f)", getTicker(), getNumShares(), getPrice());
 	}
 
 	@Override
@@ -63,7 +63,8 @@ public class Investment implements Comparable<Investment> {
 	
 	@Override
 	public int compareTo(Investment inv) {
-		return inv.getTicker().compareTo(this.ticker);
+		int compareTicker = inv.getTicker().compareTo(this.ticker);
+		return compareTicker!=0?compareTicker:(inv.numShares-this.numShares);
 	}
 
 }
