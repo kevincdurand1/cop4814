@@ -61,7 +61,7 @@ public class Portfolio implements Comparable<Portfolio> {
 		return port.getId().compareTo(this.portfolioId);
 	}
 
-	public class CompareCashBalances implements Comparator<Portfolio>{
+	public static class CompareCashBalances implements Comparator<Portfolio>{
 
 		@Override
 		public int compare(Portfolio p1, Portfolio p2) {

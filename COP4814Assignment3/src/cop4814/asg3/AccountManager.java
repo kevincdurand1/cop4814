@@ -176,17 +176,16 @@ public class AccountManager {
 	 */
 	public List<Portfolio> getPortfoliosByCashBalances(){
 		
-		Map<String, Portfolio> portfolio = new TreeMap<String, Portfolio>();
 		List<Portfolio> list = new LinkedList<Portfolio>();
 		for(Account acc: accounts.values())
 			for(Portfolio port: acc.getPortfolios())
 			{
-				portfolio.put(port.getId(), port);
+				list.add(port);
 				
 			}
-		
-		list.addAll(portfolio.values());
-		
+				
+		Collections.sort(list, new Portfolio.CompareCashBalances());
+		Collections.reverse(list);
 		return list;
 	}	
 	
