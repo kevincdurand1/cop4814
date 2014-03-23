@@ -209,7 +209,7 @@ public class AccountManager {
 			return Double.parseDouble(number);
 		}catch(NumberFormatException nfe){
 			nfe.printStackTrace();
-			return 0D;
+			return -1D;
 		}
 	}
 
