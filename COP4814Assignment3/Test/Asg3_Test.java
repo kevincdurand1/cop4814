@@ -1,5 +1,5 @@
 /**
- * Test program for COP 4814 Assignmet 3, Spring 2014.
+ * Test program for COP 4814 Assignment 3, Spring 2014.
  */
 
 import cop4814.asg3.*;
@@ -12,6 +12,8 @@ public class Asg3_Test {
 	AccountManager man = new AccountManager();
 	
 	void test_1() {
+		
+		
 
 		System.out.println("----------- Account Stock Valuations --------------" );
 		for( Account acc : man.getAccounts() ) {				
