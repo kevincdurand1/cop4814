@@ -1,17 +1,18 @@
+/**
+ * Assignment by
+ * Leonardo Menendez
+ * Robert Gomez
+ */
 package cop4814.asg3;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 public class AccountManager {
 	private Map<String, Account> accounts;
@@ -75,29 +76,28 @@ public class AccountManager {
 		return list;
 	}
 
+	
 	/**
 	 * Returns a list all stocks (investments), sorted in ascending 
 	 * order by ticker symbol.
 	 * @return
 	 */
-	
-	
 	public List<Investment> getInvestmentList(){
-	 
+
 		List<Investment> list = new LinkedList<Investment>();
-		
+
 		for(Account acc: accounts.values())
 			for( Portfolio port: acc.getPortfolios())
 				for(Investment inv : port.getHoldings())
 				{					
 					list.add(inv);
 				}
-		
-		
+		Collections.sort(list);
+		Collections.reverse(list);
 		return list;
-		}
-	
+	}
 
+	
 	/**
 	 * If the account ID is found, this method returns the sum 
 	 * value of all stock holdings in a single account not counting cash 
@@ -106,21 +106,22 @@ public class AccountManager {
 	 * @return
 	 */
 	public double getStockValuation(String accountId){
-		
+
 		double sum = 0;
-		
+
 		for(Account acc: accounts.values())
 			if(acc.getId().equals(accountId) )
 			{
-			for( Portfolio port: acc.getPortfolios())
-				for(Investment inv : port.getHoldings())
-				{
-					sum += inv.getNumShares() * inv.getPrice();
-				}
-		       return sum;
+				for( Portfolio port: acc.getPortfolios())
+					for(Investment inv : port.getHoldings())
+					{
+						sum += inv.getNumShares() * inv.getPrice();
+					}
+				return sum;
 			}
-		return 0;
+		return -1D;
 	}
+
 
 	/**
 	 * Returns a Map of all account ID's and their cash balances. The 
@@ -128,24 +129,22 @@ public class AccountManager {
 	 * @return
 	 */
 	public Map<String, Double> getCashBalances(){
-		
+
 		Map<String, Double> cash = new TreeMap<String, Double>();
-		
+
 		for(Account acc: accounts.values())
 		{
 			double sum = 0;
 			for(Portfolio port: acc.getPortfolios())
 			{
 				cash.put(acc.getId(), (sum += port.getCashBalance()));
-				
+
 			}
 		}
-		
+
 		return cash;
-		
-		
-		
 	}
+	
 
 	/**
 	 * Returns an Map of account IDs and number of shares for each
@@ -168,6 +167,7 @@ public class AccountManager {
 					{
 						sum += inv.getNumShares();
 						shares.put(acc.getId(), sum);
+						break;
 					}
 				}
 		}
@@ -181,19 +181,18 @@ public class AccountManager {
 	 */
 	public List<Portfolio> getPortfoliosByCashBalances(){
 		
-		Map<String, Portfolio> portfolio = new TreeMap<String, Portfolio>();
 		List<Portfolio> list = new LinkedList<Portfolio>();
 		for(Account acc: accounts.values())
 			for(Portfolio port: acc.getPortfolios())
 			{
-				portfolio.put(port.getId(), port);
+				list.add(port);
 				
 			}
-		
-		list.addAll(portfolio.values());
-		
+				
+		Collections.sort(list, new Portfolio.CompareCashBalances());
+		Collections.reverse(list);
 		return list;
-	}
+	}	
 	
 	
 	private int getInt(String number){
@@ -210,7 +209,7 @@ public class AccountManager {
 			return Double.parseDouble(number);
 		}catch(NumberFormatException nfe){
 			nfe.printStackTrace();
-			return 0D;
+			return -1D;
 		}
 	}
 
