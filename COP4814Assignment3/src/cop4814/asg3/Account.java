@@ -14,7 +14,7 @@ public class Account implements Comparable<Account>, Iterable<Portfolio> {
 	private List<Portfolio> portfolios = new LinkedList<Portfolio>();
 	
 	public Account() {
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	public Account(String accountId){

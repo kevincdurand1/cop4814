@@ -11,7 +11,7 @@ public class Investment implements Comparable<Investment> {
 	private double price;
 	
 	public Investment() {
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	public Investment(String ticker){
