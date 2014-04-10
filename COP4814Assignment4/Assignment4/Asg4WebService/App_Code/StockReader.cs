@@ -65,8 +65,9 @@ public class StockReader
         double low = Convert.ToDouble(nextValue(reader));
         double close = Convert.ToDouble(nextValue(reader));
         double volume = Convert.ToDouble(nextValue(reader));
+        double adjClose = Convert.ToDouble(nextValue(reader));
 
-        StockData S = new StockData(D, close);
+        StockData S = new StockData(D, open, high, low, close, volume, adjClose);
         return S;
     }
 

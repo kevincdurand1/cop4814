@@ -8,8 +8,13 @@
   <xs:element name="ArrayOfStockData" nillable="true" type="tns:ArrayOfStockData" />
   <xs:complexType name="StockData">
     <xs:sequence>
-      <xs:element minOccurs="0" name="ClosingDate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="ClosingPrice" type="xs:double" />
+      <xs:element minOccurs="0" name="sAdjClose" type="xs:double" />
+      <xs:element minOccurs="0" name="sClose" type="xs:double" />
+      <xs:element minOccurs="0" name="sDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="sHigh" type="xs:double" />
+      <xs:element minOccurs="0" name="sLow" type="xs:double" />
+      <xs:element minOccurs="0" name="sOpen" type="xs:double" />
+      <xs:element minOccurs="0" name="sVolume" type="xs:double" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="StockData" nillable="true" type="tns:StockData" />
