@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            this.dtpStart = new System.Windows.Forms.DateTimePicker();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAvg = new System.Windows.Forms.Button();
@@ -39,22 +38,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnShow = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.chtDisplay = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.errPro = new System.Windows.Forms.ErrorProvider(this.components);
+            this.mskStart = new System.Windows.Forms.MaskedTextBox();
+            this.txtEnd = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chtDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errPro)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dtpStart
-            // 
-            this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpStart.Location = new System.Drawing.Point(124, 20);
-            this.dtpStart.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.dtpStart.Name = "dtpStart";
-            this.dtpStart.Size = new System.Drawing.Size(105, 20);
-            this.dtpStart.TabIndex = 0;
             // 
             // label1
             // 
@@ -67,14 +58,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtEnd);
+            this.groupBox1.Controls.Add(this.mskStart);
             this.groupBox1.Controls.Add(this.btnAvg);
             this.groupBox1.Controls.Add(this.mskDays);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.btnShow);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.dtpEnd);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.dtpStart);
             this.groupBox1.Location = new System.Drawing.Point(12, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(784, 100);
@@ -111,7 +102,7 @@
             // 
             // btnShow
             // 
-            this.btnShow.Location = new System.Drawing.Point(248, 62);
+            this.btnShow.Location = new System.Drawing.Point(217, 61);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(110, 23);
             this.btnShow.TabIndex = 4;
@@ -128,21 +119,12 @@
             this.label2.Text = "Select End Date";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // dtpEnd
-            // 
-            this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEnd.Location = new System.Drawing.Point(124, 62);
-            this.dtpEnd.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.dtpEnd.Name = "dtpEnd";
-            this.dtpEnd.Size = new System.Drawing.Size(105, 20);
-            this.dtpEnd.TabIndex = 2;
-            // 
             // chtDisplay
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chtDisplay.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chtDisplay.Legends.Add(legend3);
+            chartArea2.Name = "ChartArea1";
+            this.chtDisplay.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chtDisplay.Legends.Add(legend2);
             this.chtDisplay.Location = new System.Drawing.Point(12, 106);
             this.chtDisplay.Name = "chtDisplay";
             this.chtDisplay.Size = new System.Drawing.Size(784, 377);
@@ -152,6 +134,23 @@
             // errPro
             // 
             this.errPro.ContainerControl = this;
+            // 
+            // mskStart
+            // 
+            this.mskStart.HidePromptOnLeave = true;
+            this.mskStart.Location = new System.Drawing.Point(124, 20);
+            this.mskStart.Mask = "00/00/0000";
+            this.mskStart.Name = "mskStart";
+            this.mskStart.Size = new System.Drawing.Size(77, 20);
+            this.mskStart.TabIndex = 8;
+            this.mskStart.ValidatingType = typeof(System.DateTime);
+            // 
+            // txtEnd
+            // 
+            this.txtEnd.Location = new System.Drawing.Point(124, 62);
+            this.txtEnd.Name = "txtEnd";
+            this.txtEnd.Size = new System.Drawing.Size(77, 20);
+            this.txtEnd.TabIndex = 9;
             // 
             // Main
             // 
@@ -172,17 +171,17 @@
 
         #endregion
 
-        private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnShow;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dtpEnd;
         private System.Windows.Forms.DataVisualization.Charting.Chart chtDisplay;
         private System.Windows.Forms.Button btnAvg;
         private System.Windows.Forms.MaskedTextBox mskDays;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ErrorProvider errPro;
+        private System.Windows.Forms.MaskedTextBox mskStart;
+        private System.Windows.Forms.TextBox txtEnd;
     }
 }
 

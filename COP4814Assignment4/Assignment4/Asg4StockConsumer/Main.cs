@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Asg4StockConsumer.localhost;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Text.RegularExpressions;
 
 namespace Asg4StockConsumer
 {
@@ -21,44 +22,54 @@ namespace Asg4StockConsumer
 
         private void allShow_Click(object sender, EventArgs e)
         {
-            changeCursor(Cursors.WaitCursor);
-            DateTime start = dtpStart.Value.Date;
-            DateTime end = dtpEnd.Value.Date;
-            Button b = (Button)sender;
-            Color lineColor = Color.Blue;
-            int days = 0;
-            errPro.Clear();
-
-            StockPriceServiceClient client = new StockPriceServiceClient();
-            client.InnerChannel.OperationTimeout = new TimeSpan(0, 30, 0);
-            StockData[] data;
-
-
-            if (b.Name == btnAvg.Name)
+            try
             {
-                try
-                {
-                    days = int.Parse(mskDays.Text);
-                }
-                catch (Exception) { }
+                changeCursor(Cursors.WaitCursor);
+                errPro.Clear();
 
-                if (days == 0 || days > 360)
-                {
-                    errPro.SetError(mskDays, "To calculate Moving Average please enter a valid value between 0 and 360 days");
-                    changeCursor(Cursors.Default);
+                DateTime start = getDateFromInput(mskStart);
+                DateTime end = getDateFromInput(txtEnd);
+                if (start == default(DateTime) || end == default(DateTime))
+                    //we have an error in the date so exit
                     return;
-                }
-                data = client.GetMovingAverage(start, end, days);
-                lineColor = Color.Red;
-            }
-            else
-            {
-                data = client.GetDateRange(start, end);
-            }
 
-            // testPrint(data);
-            graphResults(data, lineColor);
-            changeCursor(Cursors.Default);
+                Button b = (Button)sender;
+                Color lineColor = Color.Blue;
+                int days = 0;
+
+                StockPriceServiceClient client = new StockPriceServiceClient();
+                client.InnerChannel.OperationTimeout = new TimeSpan(0, 30, 0);
+                StockData[] data;
+
+
+                if (b.Name == btnAvg.Name)
+                {
+                    try
+                    {
+                        days = int.Parse(mskDays.Text);
+                    }
+                    catch (Exception) { }
+
+                    if (days == 0 || days > 360)
+                    {
+                        errPro.SetError(mskDays, "To calculate Moving Average please enter a valid value between 0 and 360 days");
+                        return;
+                    }
+                    data = client.GetMovingAverage(start, end, days);
+                    lineColor = Color.Red;
+                }
+                else
+                {
+                    data = client.GetDateRange(start, end);
+                }
+
+                // testPrint(data);
+                graphResults(data, lineColor);
+            }
+            finally
+            {
+                changeCursor(Cursors.Default);
+            }
         }
 
 
@@ -111,5 +122,27 @@ namespace Asg4StockConsumer
             this.Cursor = c;
         }
 
+
+        private DateTime getDateFromInput(TextBoxBase inputControl)
+        {
+            try
+            {
+                return DateTime.Parse(inputControl.Text);
+            }
+            catch (Exception)
+            {
+                try
+                {
+                    //Try manually
+                    String[] split = Regex.Split(inputControl.Text, "[/,-]");
+                    return new DateTime(int.Parse(split[2]), int.Parse(split[0]), int.Parse(split[1]));
+                }
+                catch (Exception)
+                {
+                    errPro.SetError(inputControl, "Please provide a valid Date");
+                    return default(DateTime);
+                }
+            }
+        }
     }
 }
