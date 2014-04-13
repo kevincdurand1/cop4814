@@ -27,7 +27,7 @@ namespace Asg4StockConsumer
                 changeCursor(Cursors.WaitCursor);
                 errPro.Clear();
 
-                DateTime start = getDateFromInput(mskStart);
+                DateTime start = getDateFromInput(txtStart);
                 DateTime end = getDateFromInput(txtEnd);
                 if (start == default(DateTime) || end == default(DateTime))
                     //we have an error in the date so exit

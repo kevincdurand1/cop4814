@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtEnd = new System.Windows.Forms.TextBox();
             this.btnAvg = new System.Windows.Forms.Button();
             this.mskDays = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,8 +41,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.chtDisplay = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.errPro = new System.Windows.Forms.ErrorProvider(this.components);
-            this.mskStart = new System.Windows.Forms.MaskedTextBox();
-            this.txtEnd = new System.Windows.Forms.TextBox();
+            this.txtStart = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chtDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errPro)).BeginInit();
@@ -58,8 +58,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtStart);
             this.groupBox1.Controls.Add(this.txtEnd);
-            this.groupBox1.Controls.Add(this.mskStart);
             this.groupBox1.Controls.Add(this.btnAvg);
             this.groupBox1.Controls.Add(this.mskDays);
             this.groupBox1.Controls.Add(this.label3);
@@ -71,6 +71,13 @@
             this.groupBox1.Size = new System.Drawing.Size(784, 100);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
+            // 
+            // txtEnd
+            // 
+            this.txtEnd.Location = new System.Drawing.Point(124, 62);
+            this.txtEnd.Name = "txtEnd";
+            this.txtEnd.Size = new System.Drawing.Size(77, 20);
+            this.txtEnd.TabIndex = 4;
             // 
             // btnAvg
             // 
@@ -97,7 +104,7 @@
             this.label3.Location = new System.Drawing.Point(447, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
-            this.label3.TabIndex = 5;
+            this.label3.TabIndex = 6;
             this.label3.Text = "Days";
             // 
             // btnShow
@@ -105,7 +112,7 @@
             this.btnShow.Location = new System.Drawing.Point(217, 61);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(110, 23);
-            this.btnShow.TabIndex = 4;
+            this.btnShow.TabIndex = 5;
             this.btnShow.Text = "Show Close Prices";
             this.btnShow.UseVisualStyleBackColor = true;
             this.btnShow.Click += new System.EventHandler(this.allShow_Click);
@@ -121,10 +128,10 @@
             // 
             // chtDisplay
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chtDisplay.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chtDisplay.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chtDisplay.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtDisplay.Legends.Add(legend1);
             this.chtDisplay.Location = new System.Drawing.Point(12, 106);
             this.chtDisplay.Name = "chtDisplay";
             this.chtDisplay.Size = new System.Drawing.Size(784, 377);
@@ -135,22 +142,12 @@
             // 
             this.errPro.ContainerControl = this;
             // 
-            // mskStart
+            // txtStart
             // 
-            this.mskStart.HidePromptOnLeave = true;
-            this.mskStart.Location = new System.Drawing.Point(124, 20);
-            this.mskStart.Mask = "00/00/0000";
-            this.mskStart.Name = "mskStart";
-            this.mskStart.Size = new System.Drawing.Size(77, 20);
-            this.mskStart.TabIndex = 8;
-            this.mskStart.ValidatingType = typeof(System.DateTime);
-            // 
-            // txtEnd
-            // 
-            this.txtEnd.Location = new System.Drawing.Point(124, 62);
-            this.txtEnd.Name = "txtEnd";
-            this.txtEnd.Size = new System.Drawing.Size(77, 20);
-            this.txtEnd.TabIndex = 9;
+            this.txtStart.Location = new System.Drawing.Point(124, 21);
+            this.txtStart.Name = "txtStart";
+            this.txtStart.Size = new System.Drawing.Size(77, 20);
+            this.txtStart.TabIndex = 2;
             // 
             // Main
             // 
@@ -180,8 +177,8 @@
         private System.Windows.Forms.MaskedTextBox mskDays;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ErrorProvider errPro;
-        private System.Windows.Forms.MaskedTextBox mskStart;
         private System.Windows.Forms.TextBox txtEnd;
+        private System.Windows.Forms.TextBox txtStart;
     }
 }
 
