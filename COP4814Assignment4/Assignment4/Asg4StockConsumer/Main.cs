@@ -1,4 +1,10 @@
-﻿using System;
+﻿/**
+ * Assignment by
+ * Leonardo Menendez
+ * Robert Gomez
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +21,8 @@ namespace Asg4StockConsumer
 {
     public partial class Main : Form
     {
+        private Color lineColor;
+
         public Main()
         {
             InitializeComponent();
@@ -27,44 +35,22 @@ namespace Asg4StockConsumer
                 changeCursor(Cursors.WaitCursor);
                 errPro.Clear();
 
-                DateTime start = getDateFromInput(txtStart);
-                DateTime end = getDateFromInput(txtEnd);
-                if (start == default(DateTime) || end == default(DateTime))
-                    //we have an error in the date so exit
-                    return;
 
                 Button b = (Button)sender;
-                Color lineColor = Color.Blue;
-                int days = 0;
+                lineColor = Color.Blue;
 
-                StockPriceServiceClient client = new StockPriceServiceClient();
-                client.InnerChannel.OperationTimeout = new TimeSpan(0, 30, 0);
-                StockData[] data;
+                StockData[] data = runReport(b);
 
-
-                if (b.Name == btnAvg.Name)
+                if (data != null)
                 {
-                    try
+                    if (data.Length == 0)
                     {
-                        days = int.Parse(mskDays.Text);
-                    }
-                    catch (Exception) { }
-
-                    if (days == 0 || days > 360)
-                    {
-                        errPro.SetError(mskDays, "To calculate Moving Average please enter a valid value between 0 and 360 days");
+                        showMessage();
                         return;
                     }
-                    data = client.GetMovingAverage(start, end, days);
-                    lineColor = Color.Red;
+                    //  testPrint(data);
+                    graphResults(data, lineColor, true);
                 }
-                else
-                {
-                    data = client.GetDateRange(start, end);
-                }
-
-                // testPrint(data);
-                graphResults(data, lineColor);
             }
             finally
             {
@@ -72,6 +58,44 @@ namespace Asg4StockConsumer
             }
         }
 
+
+        private StockData[] runReport(Button b)
+        {
+            DateTime start = getDateFromInput(txtStart);
+            DateTime end = getDateFromInput(txtEnd);
+            if (start == default(DateTime) || end == default(DateTime))
+                //we have an error in the date so exit
+                return null;
+
+
+            int days = 0;
+            StockPriceServiceClient client = new StockPriceServiceClient();
+            client.InnerChannel.OperationTimeout = new TimeSpan(0, 30, 0);
+            StockData[] data;
+
+            if (b.Name == btnAvg.Name)
+            {
+                try
+                {
+                    days = int.Parse(mskDays.Text);
+                }
+                catch (Exception) { }
+
+                if (days == 0 || days > 360)
+                {
+                    errPro.SetError(mskDays, "To calculate Moving Average please enter a valid value between 0 and 360 days");
+                    return null;
+                }
+                lineColor = Color.Red;
+                data = client.GetMovingAverage(start, end, days);
+            }
+            else
+            {
+                data = client.GetDateRange(start, end);
+            }
+
+            return data;
+        }
 
         private void testPrint(StockData[] data)
         {
@@ -81,10 +105,10 @@ namespace Asg4StockConsumer
             }
         }
 
-        private void graphResults(StockData[] data, Color lineColor)
+        private void graphResults(StockData[] data, Color lineColor, bool clear)
         {
 
-            Series series = new Series("Stock Closings");
+            Series series = new Series();
             series.Color = lineColor;
             series.BorderWidth = 2;
             series.BorderDashStyle = ChartDashStyle.Solid;
@@ -92,7 +116,8 @@ namespace Asg4StockConsumer
             series.XValueType = ChartValueType.Date;
             series.YValueType = ChartValueType.Double;
 
-            chtDisplay.Series.Clear();
+            if (clear)
+                chtDisplay.Series.Clear();
             chtDisplay.Series.Add(series);
             chtDisplay.Legends.Clear();
 
@@ -148,6 +173,42 @@ namespace Asg4StockConsumer
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCompare_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                changeCursor(Cursors.WaitCursor);
+                errPro.Clear();
+
+                StockData[] reg = runReport(btnShow);
+                StockData[] avg = runReport(btnAvg);
+
+                if (reg != null && avg != null)
+                {
+                    if (reg.Length == 0 || avg.Length == 0)
+                    {
+                        showMessage();
+                        return;
+                    }
+                    testPrint(reg);
+                    testPrint(avg);
+                    graphResults(reg, Color.Blue, true);
+                    graphResults(avg, Color.Red, false);
+                }
+
+            }
+            finally
+            {
+                changeCursor(Cursors.Default);
+            }
+
+        }
+
+        private void showMessage()
+        {
+            MessageBox.Show("Sorry, your search did not return any results", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -1,4 +1,10 @@
-﻿﻿using System;
+﻿﻿/**
+ * Assignment by
+ * Leonardo Menendez
+ * Robert Gomez
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -40,6 +46,8 @@ public class StockPriceService : IStockPriceService
 
     public StockData[] GetMovingAverage(DateTime start, DateTime stop, int days)
     {
+        int daysSplit = days / 2;
+        int mod = days % 2;
 
         if (start == null || stop == null)
             throw new NullReferenceException();
@@ -55,37 +63,44 @@ public class StockPriceService : IStockPriceService
         if (lstStockDataInput != null)
             lstStockDataOutput = new List<StockData>();
 
+
+
+        TimeSpan adjTimeBefore = new TimeSpan(daysSplit+mod, 0, 0, 0);
+        TimeSpan adjTimeAfter = new TimeSpan(daysSplit, 0, 0, 0);
+
         foreach (StockData stock in lstStockDataInput)
         {
-            int before = stock.sDate.CompareTo(start);//if start is earlier than stock date get -1
-            int after = stop.CompareTo(stock.sDate);//if stock date is after stop get -1
+            int before = stock.sDate.CompareTo(start-adjTimeBefore);//if start is earlier than stock date get -1
+            int after = stop.CompareTo(stock.sDate+adjTimeAfter);//if stock date is after stop get -1
             if (before >= 0 && after >= 0)
                 lstStockDataOutput.Add(stock);
         }
+ 
+        if (lstStockDataOutput == null || lstStockDataOutput.Count < 1)
+            return null;
 
         double sum;
         double avg = 0;
-       
 
-        for(int i=0; i < lstStockDataOutput.Count; i++)
+
+        for (int i = daysSplit; i < lstStockDataOutput.Count - (daysSplit+mod); i++)
         {
             sum = 0;
-            if (i + days < lstStockDataOutput.Count)
-            {
-                for (int j = i; j < (i + days); j++)
+            for (int j = i - daysSplit; j < (i + daysSplit+mod); j++)
                     sum += lstStockDataOutput.ElementAt(j).sAdjClose;
 
                 avg = sum / days;
                 lstStockDataOutput.ElementAt(i).sAdjClose = avg;
-            }
-            else
-            {
-                lstStockDataOutput.RemoveAt(i);
-            }
         }
 
+        //remove extra days from output
+        for(int i=0; i<daysSplit+mod; i++)
+            if(lstStockDataOutput.ElementAt(i).sDate.CompareTo(start) == -1)
+                lstStockDataOutput.RemoveAt(i);
 
-
+        for(int i=lstStockDataOutput.Count-(daysSplit+mod); i<lstStockDataOutput.Count; i++)
+            if(lstStockDataOutput.ElementAt(i).sDate.CompareTo(stop) == 1)
+                lstStockDataOutput.RemoveAt(i);
 
         return lstStockDataOutput.ToArray();
     }

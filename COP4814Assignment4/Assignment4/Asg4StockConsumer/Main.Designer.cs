@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtStart = new System.Windows.Forms.TextBox();
@@ -42,6 +42,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.chtDisplay = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.errPro = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnCompare = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chtDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errPro)).BeginInit();
@@ -58,6 +59,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnCompare);
             this.groupBox1.Controls.Add(this.txtStart);
             this.groupBox1.Controls.Add(this.txtEnd);
             this.groupBox1.Controls.Add(this.btnAvg);
@@ -136,10 +138,10 @@
             // 
             // chtDisplay
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chtDisplay.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtDisplay.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chtDisplay.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chtDisplay.Legends.Add(legend2);
             this.chtDisplay.Location = new System.Drawing.Point(12, 106);
             this.chtDisplay.Name = "chtDisplay";
             this.chtDisplay.Size = new System.Drawing.Size(784, 377);
@@ -149,6 +151,16 @@
             // errPro
             // 
             this.errPro.ContainerControl = this;
+            // 
+            // btnCompare
+            // 
+            this.btnCompare.Location = new System.Drawing.Point(653, 59);
+            this.btnCompare.Name = "btnCompare";
+            this.btnCompare.Size = new System.Drawing.Size(110, 23);
+            this.btnCompare.TabIndex = 8;
+            this.btnCompare.Text = "Compare";
+            this.btnCompare.UseVisualStyleBackColor = true;
+            this.btnCompare.Click += new System.EventHandler(this.btnCompare_Click);
             // 
             // Main
             // 
@@ -180,6 +192,7 @@
         private System.Windows.Forms.ErrorProvider errPro;
         private System.Windows.Forms.TextBox txtEnd;
         private System.Windows.Forms.TextBox txtStart;
+        private System.Windows.Forms.Button btnCompare;
     }
 }
 
