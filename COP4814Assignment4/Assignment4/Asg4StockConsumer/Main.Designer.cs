@@ -33,6 +33,7 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtStart = new System.Windows.Forms.TextBox();
             this.txtEnd = new System.Windows.Forms.TextBox();
             this.btnAvg = new System.Windows.Forms.Button();
             this.mskDays = new System.Windows.Forms.MaskedTextBox();
@@ -41,7 +42,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.chtDisplay = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.errPro = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtStart = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chtDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errPro)).BeginInit();
@@ -71,6 +71,14 @@
             this.groupBox1.Size = new System.Drawing.Size(784, 100);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // txtStart
+            // 
+            this.txtStart.Location = new System.Drawing.Point(124, 21);
+            this.txtStart.Name = "txtStart";
+            this.txtStart.Size = new System.Drawing.Size(77, 20);
+            this.txtStart.TabIndex = 2;
             // 
             // txtEnd
             // 
@@ -141,13 +149,6 @@
             // errPro
             // 
             this.errPro.ContainerControl = this;
-            // 
-            // txtStart
-            // 
-            this.txtStart.Location = new System.Drawing.Point(124, 21);
-            this.txtStart.Name = "txtStart";
-            this.txtStart.Size = new System.Drawing.Size(77, 20);
-            this.txtStart.TabIndex = 2;
             // 
             // Main
             // 

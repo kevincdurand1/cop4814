@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -11,11 +11,11 @@ using System.Text;
 public interface IStockPriceService
 {
 
-	[OperationContract]
-	StockData[] GetDateRange(DateTime start, DateTime stop);
+    [OperationContract]
+    StockData[] GetDateRange(DateTime start, DateTime stop);
 
-	[OperationContract]
-	StockData[] GetMovingAverage(DateTime start, DateTime stop, int days); 
+    [OperationContract]
+    StockData[] GetMovingAverage(DateTime start, DateTime stop, int days);
 
 
 }
@@ -24,6 +24,14 @@ public interface IStockPriceService
 [DataContract]
 public class StockData
 {
+    private int p1;
+    private int p2;
+    private int p3;
+    private int p4;
+    private int p5;
+    private int p6;
+    private int p7;
+
     public StockData(DateTime date, double open, double high, double low, double close, double volume, double adjClose)
     {
         sDate = date;
@@ -34,8 +42,20 @@ public class StockData
         sVolume = volume;
         sAdjClose = adjClose;
     }
-	[DataMember]
-	public DateTime sDate{ get; set; }
+
+    public StockData(int p1, int p2, int p3, int p4, int p5, int p6, int p7)
+    {
+        // TODO: Complete member initialization
+        this.p1 = p1;
+        this.p2 = p2;
+        this.p3 = p3;
+        this.p4 = p4;
+        this.p5 = p5;
+        this.p6 = p6;
+        this.p7 = p7;
+    }
+    [DataMember]
+    public DateTime sDate { get; set; }
 
     [DataMember]
     public double sClose { get; set; }

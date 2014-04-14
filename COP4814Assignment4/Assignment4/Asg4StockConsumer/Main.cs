@@ -144,5 +144,10 @@ namespace Asg4StockConsumer
                 }
             }
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
