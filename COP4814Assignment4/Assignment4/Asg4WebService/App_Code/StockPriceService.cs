@@ -63,28 +63,30 @@ public class StockPriceService : IStockPriceService
                 lstStockDataOutput.Add(stock);
         }
 
-        StockData[] a = lstStockDataOutput.ToArray();
         double sum;
         double avg = 0;
        
 
-        for(int i=0; i != a.Length; i++)
+        for(int i=0; i < lstStockDataOutput.Count; i++)
         {
             sum = 0;
-            for (int j = 0; j != days; j++)
+            if (i + days < lstStockDataOutput.Count)
             {
-                sum += a[i].sClose;
+                for (int j = i; j < (i + days); j++)
+                    sum += lstStockDataOutput.ElementAt(j).sAdjClose;
+
+                avg = sum / days;
+                lstStockDataOutput.ElementAt(i).sAdjClose = avg;
             }
-            avg = sum / days;
-            a[i].sClose = avg;
+            else
+            {
+                lstStockDataOutput.RemoveAt(i);
+            }
         }
 
 
 
 
-
-
-
-        return a;
+        return lstStockDataOutput.ToArray();
     }
 }
